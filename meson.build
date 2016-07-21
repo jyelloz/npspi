@@ -8,6 +8,8 @@ project(
 
 cc = meson.get_compiler('c')
 
+libm = cc.find_library('m')
+libev = dependency('libev')
 mpsse = cc.find_library('mpsse')
 ftdi1 = dependency('libftdi1')
 
@@ -28,6 +30,6 @@ lib = library(
 executable(
     'npspi',
     'main.c',
-    dependencies: deps,
+    dependencies: deps + [libm, libev],
     link_with: [lib],
 )
