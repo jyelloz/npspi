@@ -18,7 +18,10 @@ deps = [
 
 lib = library(
     'npspi',
-    'npspi.c',
+    [
+        'npspi.c',
+        'nplut.c',
+    ],
     dependencies: deps,
 )
 

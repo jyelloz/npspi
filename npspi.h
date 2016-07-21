@@ -13,6 +13,9 @@ typedef struct _NpSpiContext NpSpiContext;
 NpSpiContext *
 npspi_new       (const size_t n_pixels);
 
+void
+npspi_free      (NpSpiContext *const ctx);
+
 int
 npspi_open      (NpSpiContext *const ctx);
 
