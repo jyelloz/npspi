@@ -50,7 +50,8 @@ npspi_free (NpSpiContext *const self)
 
   free (self->fb);
   free (self->spi_buffer);
-  free (self->mpsse_ctx);
+
+  Close (self->mpsse_ctx);
 
   free (self);
 
@@ -100,16 +101,6 @@ npspi_show (NpSpiContext *const self)
   Start (mpsse);
   Write (mpsse, (char *) spi_buffer, n_spi_bytes);
   Stop (mpsse);
-
-  return 0;
-
-}
-
-int
-npspi_close (NpSpiContext *const self)
-{
-
-  Close (self->mpsse_ctx);
 
   return 0;
 

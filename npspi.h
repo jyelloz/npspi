@@ -27,9 +27,6 @@ npspi_set_color (NpSpiContext *const ctx,
 int
 npspi_show      (NpSpiContext *const ctx);
 
-int
-npspi_close     (NpSpiContext *const ctx);
-
 #ifdef __cplusplus
 }
 #endif
