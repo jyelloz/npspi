@@ -9,7 +9,7 @@ project(
 cc = meson.get_compiler('c')
 
 libm = cc.find_library('m')
-libev = dependency('libev')
+libev = cc.find_library('ev')
 mpsse = cc.find_library('mpsse')
 ftdi1 = dependency('libftdi1')
 
