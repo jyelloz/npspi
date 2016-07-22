@@ -68,8 +68,6 @@ main (int argc, char **const argv)
   ev_timer_start (loop, timer);
   ev_run (loop, 0);
 
-  npspi_close (ctx);
-
   npspi_free (ctx);
 
   return 0;
