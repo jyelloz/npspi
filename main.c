@@ -8,7 +8,8 @@
 #ifndef N_PIXELS
 #define N_PIXELS 64
 #endif
-#define MAX_BRIGHTNESS 0.1
+#define BRIGHTNESS_MIN 0
+#define BRIGHTNESS_MAX 0.4
 
 struct animation_ctx {
 
@@ -26,10 +27,9 @@ frame_cb (EV_P_ ev_timer *const timer, const int revents)
 
   const ev_tstamp now = ev_now (loop);
 
-  /* const double brightness = 0.05 + (pow (sin (now), 2) * 0.10); */
   const double value = pow (sin (now), 2);
-  const double brightness = 0.05 + (value * MAX_BRIGHTNESS);
-  const double brightness_inv = 0.05 + ((1 - value) * MAX_BRIGHTNESS);
+  const double brightness = BRIGHTNESS_MIN + (value * BRIGHTNESS_MAX);
+  const double brightness_inv = BRIGHTNESS_MIN + ((1 - value) * BRIGHTNESS_MAX);
 
   for (int i = 0; i < N_PIXELS; i++) {
 
