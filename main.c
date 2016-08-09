@@ -5,6 +5,9 @@
 
 #define FPS 30
 #define PERIOD (1.0 / FPS)
+#ifndef N_PIXELS
+#define N_PIXELS 64
+#endif
 
 struct animation_ctx {
 
@@ -27,7 +30,7 @@ frame_cb (EV_P_ ev_timer *const timer, const int revents)
   const double brightness = 0.05 + (value * 0.95);
   const double brightness_inv = 0.05 + ((1 - value) * 0.95);
 
-  for (int i = 0; i < 8; i++) {
+  for (int i = 0; i < N_PIXELS; i++) {
 
     const uint8_t level = (uint8_t) (0xff * brightness);
     const uint8_t level_inv = (uint8_t) (0xff * brightness_inv);
@@ -55,7 +58,7 @@ main (int argc, char **const argv)
 {
 
   struct ev_loop *const loop = EV_DEFAULT;
-  NpSpiContext *const ctx = npspi_new (8);
+  NpSpiContext *const ctx = npspi_new (N_PIXELS);
   struct animation_ctx animation = {
     .npspi_ctx = ctx,
   };
