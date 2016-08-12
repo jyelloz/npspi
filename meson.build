@@ -23,6 +23,7 @@ lib = library(
     [
         'npspi.c',
         'nplut.c',
+        'npgammalut.c',
     ],
     dependencies: deps,
 )
