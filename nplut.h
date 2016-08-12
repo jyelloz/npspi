@@ -3,12 +3,14 @@
 
 #define NPLUT_RATIO 24
 
+#include <stdint.h>
+
 #ifdef  __cplusplus
 extern "C" {
 #endif
 
-const unsigned char *
-nplut_get (unsigned int i);
+const uint8_t *
+nplut_get (uint8_t const i);
 
 #ifdef __cplusplus
 }
