@@ -23,6 +23,12 @@ deps = [
 
 lib_name = 'npspi-' + api_version
 
+map_file = 'npspi.map'
+link_args = '-Wl,--version-script,@0@/@1@'.format(
+    meson.current_source_dir(),
+    map_file
+)
+
 lib = library(
     lib_name,
     [
@@ -33,6 +39,8 @@ lib = library(
     dependencies: deps,
     install: true,
     version: abi_version,
+    link_args: link_args,
+    link_depends: map_file,
 )
 
 install_headers('npspi.h', subdir: lib_name)
