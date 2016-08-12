@@ -8,7 +8,11 @@
 #include <string.h>
 #include <mpsse.h>
 
-#define MHZ_20 ((unsigned int) 20e6)
+typedef enum {
+  MHZ_30 = (unsigned int) 30e6,
+  MHZ_20 = (unsigned int) 20e6,
+  MHZ_06 = (unsigned int)  6e6,
+} Hz;
 
 struct _NpSpiContext {
 
