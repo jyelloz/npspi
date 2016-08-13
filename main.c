@@ -76,4 +76,5 @@ main (void)
   npspi_free (ctx);
 
   return 0;
+
 }
