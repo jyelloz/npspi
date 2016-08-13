@@ -58,6 +58,6 @@ pkgconfig.generate(
 executable(
     'npspi',
     'main.c',
-    dependencies: deps + [libm, libev],
+    dependencies: [libm, libev],
     link_with: [lib],
 )
