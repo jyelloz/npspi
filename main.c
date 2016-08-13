@@ -20,22 +20,22 @@ struct animation_ctx {
 };
 
 static void
-frame_cb (EV_P_ ev_timer *const timer, const int revents)
+frame_cb (EV_P_ ev_timer *const timer, int const revents)
 {
 
   struct animation_ctx *const animation = (struct animation_ctx *) timer;
   NpSpiContext *const npspi = animation->npspi_ctx;
 
-  const ev_tstamp now = ev_now (loop);
+  ev_tstamp const now = ev_now (loop);
 
-  const double value = pow (sin (now), 2);
-  const double brightness = BRIGHTNESS_MIN + (value * BRIGHTNESS_MAX);
-  const double brightness_inv = BRIGHTNESS_MIN + ((1 - value) * BRIGHTNESS_MAX);
+  double const value = pow (sin (now), 2);
+  double const brightness = BRIGHTNESS_MIN + (value * BRIGHTNESS_MAX);
+  double const brightness_inv = BRIGHTNESS_MIN + ((1 - value) * BRIGHTNESS_MAX);
 
   for (int i = 0; i < N_PIXELS; i++) {
 
-    const uint8_t level = (uint8_t) (0xff * brightness);
-    const uint8_t level_inv = (uint8_t) (0xff * brightness_inv);
+    uint8_t const level = (uint8_t) (0xff * brightness);
+    uint8_t const level_inv = (uint8_t) (0xff * brightness_inv);
 
     switch (i % 3) {
       case 0:
