@@ -26,15 +26,15 @@ struct _NpSpiContext {
 };
 
 NpSpiContext *
-npspi_new (const size_t n_pixels)
+npspi_new (size_t const n_pixels)
 {
 
   NpSpiContext *const ctx = calloc (1, sizeof (NpSpiContext));
 
   memset (ctx, 0, sizeof (NpSpiContext));
 
-  const size_t n_bytes = n_pixels * 3;
-  const size_t n_spi_bytes = n_bytes * NPLUT_RATIO;
+  size_t const n_bytes = n_pixels * 3;
+  size_t const n_spi_bytes = n_bytes * NPLUT_RATIO;
 
   ctx->n_pixels = n_pixels;
   ctx->fb = calloc (n_bytes, sizeof (uint8_t));
@@ -73,11 +73,11 @@ npspi_open (NpSpiContext *const self)
 
 void
 npspi_set_color (NpSpiContext *const self,
-                 const uint32_t      pixel,
-                 const uint32_t      color)
+                 uint32_t      const pixel,
+                 uint32_t      const color)
 {
 
-  const size_t offset = pixel * 3;
+  size_t const offset = pixel * 3;
   uint8_t *const base = &(self->fb[offset]);
 
   base[0] = 0xff & (color >> 8);
@@ -90,15 +90,15 @@ int
 npspi_show (NpSpiContext *const self)
 {
 
-  const size_t n_bytes = self->n_pixels * 3;
-  const uint8_t *const fb = self->fb;
+  size_t const n_bytes = self->n_pixels * 3;
+  uint8_t const *const fb = self->fb;
   struct mpsse_context *const mpsse = self->mpsse_ctx;
 
   uint8_t *const spi_buffer = self->spi_buffer;
-  const size_t n_spi_bytes = self->n_spi_bytes;
+  size_t const n_spi_bytes = self->n_spi_bytes;
 
   for (int i = 0; i < n_bytes; i++) {
-    const uint8_t *const byte_wave = nplut_get (fb[i]);
+    uint8_t const *const byte_wave = nplut_get (fb[i]);
     memcpy (&(spi_buffer[i * NPLUT_RATIO]), byte_wave, NPLUT_RATIO);
   }
 

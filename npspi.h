@@ -11,7 +11,7 @@ extern "C" {
 typedef struct _NpSpiContext NpSpiContext;
 
 NpSpiContext *
-npspi_new       (const size_t n_pixels);
+npspi_new       (size_t const n_pixels);
 
 void
 npspi_free      (NpSpiContext *const ctx);
@@ -21,8 +21,8 @@ npspi_open      (NpSpiContext *const ctx);
 
 void
 npspi_set_color (NpSpiContext *const ctx,
-                 const uint32_t      pixel,
-                 const uint32_t      color);
+                 uint32_t      const pixel,
+                 uint32_t      const color);
 
 int
 npspi_show      (NpSpiContext *const ctx);

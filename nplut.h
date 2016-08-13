@@ -9,7 +9,7 @@
 extern "C" {
 #endif
 
-const uint8_t *
+uint8_t const *
 nplut_get (uint8_t const i);
 
 #ifdef __cplusplus
