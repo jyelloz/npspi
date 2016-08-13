@@ -1,4 +1,4 @@
-V1_0_0 {
+NPSPI_V1_0_0 {
     global:
         npspi_*;
     local:
