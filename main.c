@@ -56,7 +56,7 @@ frame_cb (EV_P_ ev_timer *const timer, int const revents)
 }
 
 int
-main (int argc, char **const argv)
+main (void)
 {
 
   struct ev_loop *const loop = EV_DEFAULT;
