@@ -1,5 +1,6 @@
 #include "npspi.h"
 #include "nplut.h"
+#include "npgammalut.h"
 
 #include <stdlib.h>
 #include <stddef.h>
@@ -80,9 +81,9 @@ npspi_set_color (NpSpiContext *const self,
   size_t const offset = pixel * 3;
   uint8_t *const base = &(self->fb[offset]);
 
-  base[0] = 0xff & (color >> 8);
-  base[1] = 0xff & (color >> 16);
-  base[2] = 0xff & (color >> 0);
+  base[0] = npgammalut_get (0xff & (color >> 8));
+  base[1] = npgammalut_get (0xff & (color >> 16));
+  base[2] = npgammalut_get (0xff & (color >> 0));
 
 }
 
