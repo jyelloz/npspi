@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <math.h>
 #include <ev.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 #include "npspi.h"
 
 #define FPS 30
@@ -16,6 +17,7 @@ struct animation_ctx {
 
   ev_timer timer;
   NpSpiContext *npspi_ctx;
+  GdkPixbuf *pixbuf;
 
 };
 
@@ -55,6 +57,33 @@ frame_cb (EV_P_ ev_timer *const timer, int const revents)
 
 }
 
+static void
+image_cb (EV_P_ ev_timer *const timer, int const revents)
+{
+
+  struct animation_ctx *const animation = (struct animation_ctx *) timer;
+  NpSpiContext *const npspi = animation->npspi_ctx;
+  GdkPixbuf *const pixbuf = animation->pixbuf;
+
+  uint8_t const *const pixels = gdk_pixbuf_read_pixels (pixbuf);
+  size_t const pixels_length = (size_t) gdk_pixbuf_get_byte_length (pixbuf);
+
+  for (int i = 0; i < N_PIXELS; i++) {
+
+    uint8_t const *const p = &(pixels[i * 4]);
+
+    npspi_set_color (
+      npspi,
+      i,
+      (p[0] << 16) | (p[1] << 8) | (p[2])
+    );
+
+  }
+
+  npspi_show (npspi);
+
+}
+
 int
 main (void)
 {
@@ -68,10 +97,25 @@ main (void)
 
   npspi_open (ctx);
 
+#if 0
   ev_timer_init (timer, frame_cb, 0, PERIOD);
 
   ev_timer_start (loop, timer);
   ev_run (loop, 0);
+#else
+
+  g_autoptr(GdkPixbuf) pixbuf = gdk_pixbuf_new_from_file (
+    "/home/joe/display.png",
+    NULL
+  );
+  animation.pixbuf = pixbuf;
+
+  ev_timer_init (timer, image_cb, 0, PERIOD);
+
+  ev_timer_start (loop, timer);
+  ev_run (loop, 0);
+
+#endif
 
   npspi_free (ctx);
 

@@ -15,6 +15,7 @@ libm = cc.find_library('m')
 libev = cc.find_library('ev')
 mpsse = cc.find_library('mpsse')
 ftdi1 = dependency('libftdi1')
+gdk_pixbuf = dependency('gdk-pixbuf-2.0')
 
 deps = [
     mpsse,
@@ -56,8 +57,9 @@ pkgconfig.generate(
 )
 
 executable(
-    'npspi',
+    'npspi-demo',
     'main.c',
-    dependencies: [libm, libev],
+    dependencies: [libm, libev, gdk_pixbuf],
     link_with: [lib],
+    install: true,
 )
