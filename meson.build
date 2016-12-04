@@ -2,7 +2,7 @@ project(
     'npspi',
     'c',
     default_options: [
-        'c_std=gnu99',
+        'c_std=c99',
     ],
 )
 
